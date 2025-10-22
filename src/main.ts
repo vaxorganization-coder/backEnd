@@ -6,14 +6,18 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Enable CORS
+  const origin = [
+    'http://localhost:3000',
+    'https://minhavax.com',
+    'https://www.minhavax.com',
+  ]
+  
   app.enableCors({
-    origin: '*',
+    origin,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
-
-  // Global validation pipe
+  
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
