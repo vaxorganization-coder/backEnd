@@ -69,9 +69,12 @@ print_status "Running database migrations..."
 npx prisma migrate deploy
 
 print_status "Stopping and removing existing PM2 process (if running)..."
-if pm2 status vax-backend > /dev/null 2>&1; then
+if pm2 list | grep -q "vax-backend"; then
     pm2 stop vax-backend
     pm2 delete vax-backend
+    print_status "Existing process stopped and removed"
+else
+    print_warning "No existing process found"
 fi
 
 print_status "Building the application..."
