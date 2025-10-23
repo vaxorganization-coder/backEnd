@@ -68,11 +68,12 @@ npx prisma generate
 print_status "Running database migrations..."
 npx prisma migrate deploy
 
+print_status "Stopping and removing existing PM2 process (if running)..."
+pm2 stop vax-backend
+pm2 delete vax-backend
+
 print_status "Building the application..."
 npm run build
-
-print_status "Stopping and removing existing PM2 process (if running)..."
-pm2 delete vax-backend 2>/dev/null || print_warning "No existing process found"
 
 print_status "Starting application with PM2..."
 pm2 start npm --name "vax-backend" -- run start:prod
