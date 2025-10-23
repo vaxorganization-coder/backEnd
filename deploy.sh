@@ -81,7 +81,7 @@ print_status "Building the application..."
 npm run build
 
 print_status "Starting application with PM2..."
-pm2 start npm --name "vax-backend" -- run start:prod
+pm2 start dist/src/main.js --name vax-backend
 
 print_status "Saving PM2 configuration..."
 pm2 save
