@@ -7,7 +7,6 @@ export class LoginDto {
     description: 'Número de telefone angolano (formato: +244xxxxxxxxx)',
     example: '+244923456789',
   })
-  @IsAngolaPhone()
   @IsNotEmpty()
   phone: string;
 
